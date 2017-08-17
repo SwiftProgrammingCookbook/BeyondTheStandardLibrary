@@ -44,7 +44,7 @@ func createIssue(inRepo repo: String,
     let jsonData = try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
     request.httpBody = jsonData
     
-    session.dataTask(with: request) { (data, response, error) in
+    let task = session.dataTask(with: request) { (data, response, error) in
         
         guard let jsonData = data else {
             completionHandler(nil, ResponseError.requestUnsucessful)
@@ -67,6 +67,7 @@ func createIssue(inRepo repo: String,
             completionHandler(nil, error)
         }
     }
+    task.resume()
 }
 
 createIssue(inRepo: "BeyondTheStandardLibrary",
