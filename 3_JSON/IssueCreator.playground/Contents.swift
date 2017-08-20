@@ -28,6 +28,7 @@ func createIssue(inRepo repo: String,
     let urlString = "https://api.github.com/repos/\(user)/\(repo)/issues"
     let url = URL(string: urlString)!
     var request = URLRequest(url: url)
+    request.httpMethod = "POST"
     request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
     let authorisationValue = authHeaderValue(for: <#your personal access token#>)
     request.setValue(authorisationValue, forHTTPHeaderField: "Authorization")
